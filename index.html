@@ -44,7 +44,9 @@
               <span class="sr-only">Search</span>
             </button>
           </div>
-          <time datetime="2021-04-21" class="text-lg mr-4">15.10.2024</time>
+          <time id="current-date" datetime="2024-10-15" class="text-lg mr-4"
+            >15.10.2024</time
+          >
         </header>
 
         <article class="flex flex-col items-center justify-center">
@@ -56,7 +58,7 @@
 
         <!-- 5-day Weather Forecast -->
         <section class="mt-8">
-          <div class="flex items-center justify-between">
+          <div class="flex items-center justify-between" id="weather-cards">
             <article
               class="max-w-sm mx-auto bg-white shadow-lg rounded-lg overflow-hidden p-6 text-center"
             >
@@ -174,5 +176,7 @@
         </section>
       </aside>
     </main>
+
+    <script src="script.js"></script>
   </body>
 </html>
