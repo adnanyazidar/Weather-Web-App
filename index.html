@@ -13,17 +13,18 @@
       <!-- Main Section: Weather Overview -->
       <section class="w-3/4 pr-8 mr-4 p-6">
         <header class="flex justify-between items-center mb-6">
-          <h1 class="text-2xl font-semibold">Jakarta</h1>
+          <h1 id="city-heading" class="text-2xl font-semibold">Jakarta</h1>
+
           <div class="relative w-full max-w-md mx-8 no-dark-mode">
             <input
               type="search"
-              id="location-search"
+              id="city"
               class="block p-2.5 w-full z-20 text-sm rounded-lg no-dark-mode-input"
               placeholder="Search for city or address"
               required
             />
             <button
-              type="submit"
+              id="search-button"
               class="absolute top-0 right-0 h-full p-2.5 text-sm font-medium rounded-r-lg no-dark-mode-button"
             >
               <svg
@@ -44,6 +45,9 @@
               <span class="sr-only">Search</span>
             </button>
           </div>
+
+          <p id="city-name"></p>
+          <div id="fetch-loading" style="display: none">Loading...</div>
 
           <div class="relative inline-block text-left">
             <button
@@ -125,9 +129,9 @@
 
         <!-- 5-day Weather Forecast -->
         <section class="mt-8">
-          <div class="flex items-center justify-between" id="weather-cards">
+          <div id="weather-cards" class="grid grid-cols-1 lg:grid-cols-5 gap-4">
             <article
-              class="max-w-sm mx-auto shadow-lg rounded-lg overflow-hidden p-6 text-center weather-card"
+              class="shadow-lg rounded-lg overflow-hidden p-6 text-center weather-card"
             >
               <p class="text-lg mb-4">Today</p>
               <p class="text-2xl font-bold">20°</p>
@@ -135,40 +139,47 @@
             </article>
 
             <article
-              class="max-w-sm mx-auto shadow-lg rounded-lg overflow-hidden p-6 text-center weather-card"
+              class="shadow-lg rounded-lg overflow-hidden p-6 text-center weather-card"
             >
               <p class="text-lg mb-4">Tue</p>
               <p class="text-2xl font-bold">32°</p>
               <p class="text-sm">Sunny</p>
             </article>
+
             <article
-              class="max-w-sm mx-auto bg-white shadow-lg rounded-lg overflow-hidden p-6 text-center"
+              class="shadow-lg rounded-lg overflow-hidden p-6 text-center weather-card"
             >
-              <p class="text-gray-500 text-lg mb-4">Wed</p>
+              <p class="text-lg mb-4">Wed</p>
               <p class="text-2xl font-bold">12°</p>
-              <p class="text-sm text-gray-500">Rainy</p>
+              <p class="text-sm">Rainy</p>
             </article>
+
             <article
-              class="max-w-sm mx-auto bg-white shadow-lg rounded-lg overflow-hidden p-6 text-center"
+              class="shadow-lg rounded-lg overflow-hidden p-6 text-center weather-card"
             >
-              <p class="text-gray-500 text-lg mb-4">Thu</p>
+              <p class="text-lg mb-4">Thu</p>
               <p class="text-2xl font-bold">13°</p>
-              <p class="text-sm text-gray-500">Rainy</p>
+              <p class="text-sm">Rainy</p>
             </article>
+
             <article
-              class="max-w-sm mx-auto bg-white shadow-lg rounded-lg overflow-hidden p-6 text-center"
+              class="shadow-lg rounded-lg overflow-hidden p-6 text-center weather-card"
             >
-              <p class="text-gray-500 text-lg mb-4">Fri</p>
+              <p class="text-lg mb-4">Fri</p>
               <p class="text-2xl font-bold">22°</p>
-              <p class="text-sm text-gray-500">Mist</p>
+              <p class="text-sm">Mist</p>
             </article>
-            <article
-              class="max-w-sm mx-auto bg-white shadow-lg rounded-lg overflow-hidden p-6 text-center"
-            >
-              <p class="text-gray-500 text-lg mb-4">Sat</p>
-              <p class="text-2xl font-bold">22°</p>
-              <p class="text-sm text-gray-500">Mist</p>
-            </article>
+
+            <!-- Baris kedua: sisa elemen, dimuat di tengah -->
+            <div class="flex justify-center col-span-full">
+              <article
+                class="shadow-lg rounded-lg overflow-hidden p-6 text-center weather-card"
+              >
+                <p class="text-lg mb-4">Sat</p>
+                <p class="text-2xl font-bold">22°</p>
+                <p class="text-sm">Mist</p>
+              </article>
+            </div>
           </div>
         </section>
       </section>

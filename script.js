@@ -2,12 +2,12 @@ const themeButton = document.getElementById("theme-button");
 const themeMenu = document.getElementById("theme-menu");
 const themeIcon = document.getElementById("theme-icon");
 
-// Toggle dropdown visibility
+
 themeButton.addEventListener("click", () => {
   themeMenu.classList.toggle("hidden");
 });
 
-// Theme change handlers
+
 document.getElementById("theme-os-default").addEventListener("click", () => {
   document.body.classList.remove("dark-mode");
   localStorage.setItem("theme", "os-default");
@@ -29,7 +29,7 @@ document.getElementById("theme-dark").addEventListener("click", () => {
   themeMenu.classList.add("hidden");
 });
 
-// Set theme on load based on localStorage
+
 window.addEventListener("load", () => {
   const savedTheme = localStorage.getItem("theme");
   if (savedTheme === "dark") {
@@ -39,7 +39,7 @@ window.addEventListener("load", () => {
     document.body.classList.remove("dark-mode");
     themeIcon.textContent = "☀️";
   } else {
-    themeIcon.textContent = "🌗"; // OS Default
+    themeIcon.textContent = "🌗"; 
   }
 });
 
@@ -64,6 +64,78 @@ document.addEventListener("DOMContentLoaded", () => {
     today.toISOString().split("T")[0]
   );
   currentDateElement.textContent = dateFormattedFull(today);
+});
+
+
+async function getWeatherByCity() {
+  const city = document.getElementById("city").value;
+  if (!city) {
+    alert("Please enter a city name");
+    return;
+  }
+
+
+  document.getElementById("fetch-loading").style.display = "block";
+
+  try {
+    const response = await fetch(
+      `https://geocoding-api.open-meteo.com/v1/search?name=${city}&count=10&language=en&format=json`
+    );
+    const responseJson = await response.json();
+
+   
+    if (!responseJson.results || responseJson.results.length === 0) {
+      alert("City not found");
+      document.getElementById("fetch-loading").style.display = "none";
+      return;
+    }
+
+    const latitude = responseJson.results[0].latitude;
+    const longitude = responseJson.results[0].longitude;
+    const cityName = responseJson.results[0].name;
+
+    localStorage.setItem("cityName", cityName);
+    localStorage.setItem("latitude", latitude);
+    localStorage.setItem("longitude", longitude);
+
+    
+    getWeather(latitude, longitude);
+
+    
+    document.getElementById("city-heading").innerHTML = cityName;
+
+    
+    document.getElementById("city-name").innerHTML = `Weather in ${cityName}`;
+
+ 
+    document.getElementById("city").value = "";
+  } catch (error) {
+    console.error("Error fetching weather data:", error);
+    alert("Error fetching weather data. Please try again.");
+  } finally {
+    
+    document.getElementById("fetch-loading").style.display = "none";
+  }
+}
+
+
+document
+  .getElementById("search-button")
+  .addEventListener("click", getWeatherByCity);
+
+document.addEventListener("DOMContentLoaded", () => {
+  const savedCity = localStorage.getItem("cityName");
+  const savedLatitude = localStorage.getItem("latitude");
+  const savedLongitude = localStorage.getItem("longitude");
+
+  if (savedCity && savedLatitude && savedLongitude) {
+  
+    document.getElementById("city-heading").innerHTML = savedCity;
+    getWeather(savedLatitude, savedLongitude);
+  } else {
+    
+    getLocation();
+  }
 });
 
 async function getWeather(latitude, longitude) {

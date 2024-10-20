@@ -26,7 +26,109 @@ body {
   background-color: var(--bg-color);
   color: var(--text-color);
 }
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
 
+.container {
+  padding: 20px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.header h1 {
+  font-size: 24px;
+}
+
+.search-bar input {
+  padding: 10px;
+  margin-right: 5px;
+}
+
+.theme-dropdown {
+  position: relative;
+}
+
+.theme-dropdown ul {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: white;
+  border: 1px solid #ccc;
+  padding: 10px;
+  list-style: none;
+}
+
+.theme-dropdown:hover ul {
+  display: block;
+}
+
+.weather-summary {
+  text-align: center;
+}
+
+.weather-summary p {
+  margin: 10px 0;
+}
+
+.weather-cards {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.card {
+  background-color: #f1f1f1;
+  padding: 20px;
+  text-align: center;
+  border-radius: 5px;
+}
+
+/* Sidebar default style for mobile */
+.sidebar {
+  margin-top: 20px;
+  background-color: #f6f6f6;
+  padding: 20px;
+}
+
+/* Tablet and above (768px+) */
+@media (min-width: 768px) {
+  .container {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .content {
+    width: 70%;
+  }
+
+  .sidebar {
+    width: 30%;
+    margin-top: 0;
+  }
+}
+
+/* Laptop and above (1024px+) */
+@media (min-width: 1024px) {
+  .weather-cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Larger desktop (1280px+) */
+@media (min-width: 1280px) {
+  .weather-cards {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
 main,
 aside,
 .container-desktop {
