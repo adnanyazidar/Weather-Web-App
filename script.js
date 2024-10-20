@@ -1,3 +1,48 @@
+const themeButton = document.getElementById("theme-button");
+const themeMenu = document.getElementById("theme-menu");
+const themeIcon = document.getElementById("theme-icon");
+
+// Toggle dropdown visibility
+themeButton.addEventListener("click", () => {
+  themeMenu.classList.toggle("hidden");
+});
+
+// Theme change handlers
+document.getElementById("theme-os-default").addEventListener("click", () => {
+  document.body.classList.remove("dark-mode");
+  localStorage.setItem("theme", "os-default");
+  themeIcon.textContent = "🌗";
+  themeMenu.classList.add("hidden");
+});
+
+document.getElementById("theme-light").addEventListener("click", () => {
+  document.body.classList.remove("dark-mode");
+  localStorage.setItem("theme", "light");
+  themeIcon.textContent = "☀️";
+  themeMenu.classList.add("hidden");
+});
+
+document.getElementById("theme-dark").addEventListener("click", () => {
+  document.body.classList.add("dark-mode");
+  localStorage.setItem("theme", "dark");
+  themeIcon.textContent = "🌙";
+  themeMenu.classList.add("hidden");
+});
+
+// Set theme on load based on localStorage
+window.addEventListener("load", () => {
+  const savedTheme = localStorage.getItem("theme");
+  if (savedTheme === "dark") {
+    document.body.classList.add("dark-mode");
+    themeIcon.textContent = "🌙";
+  } else if (savedTheme === "light") {
+    document.body.classList.remove("dark-mode");
+    themeIcon.textContent = "☀️";
+  } else {
+    themeIcon.textContent = "🌗"; // OS Default
+  }
+});
+
 function dateFormattedFull(date) {
   const options = {
     weekday: "long",

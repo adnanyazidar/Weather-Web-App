@@ -9,22 +9,22 @@
   </head>
 
   <body class="bg-gray-100 flex items-center justify-center min-h-screen">
-    <main class="bg-white rounded-lg shadow-lg flex container-desktop">
+    <main class="rounded-lg shadow-lg flex container-desktop">
       <!-- Main Section: Weather Overview -->
       <section class="w-3/4 pr-8 mr-4 p-6">
         <header class="flex justify-between items-center mb-6">
           <h1 class="text-2xl font-semibold">Jakarta</h1>
-          <div class="relative w-full max-w-md mx-8">
+          <div class="relative w-full max-w-md mx-8 no-dark-mode">
             <input
               type="search"
               id="location-search"
-              class="block p-2.5 w-full z-20 text-sm text-gray-900 bg-gray-50 rounded-lg border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:border-blue-500"
+              class="block p-2.5 w-full z-20 text-sm rounded-lg no-dark-mode-input"
               placeholder="Search for city or address"
               required
             />
             <button
               type="submit"
-              class="absolute top-0 right-0 h-full p-2.5 text-sm font-medium text-white bg-blue-700 rounded-r-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+              class="absolute top-0 right-0 h-full p-2.5 text-sm font-medium rounded-r-lg no-dark-mode-button"
             >
               <svg
                 class="w-4 h-4"
@@ -44,15 +44,82 @@
               <span class="sr-only">Search</span>
             </button>
           </div>
-          <time id="current-date" datetime="2024-10-15" class="text-lg mr-4"
-            >15.10.2024</time
-          >
+
+          <div class="relative inline-block text-left">
+            <button
+              id="theme-button"
+              type="button"
+              class="inline-flex justify-center w-full rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+              aria-expanded="true"
+              aria-haspopup="true"
+            >
+              <span id="theme-icon">☀️</span> Theme
+              <svg
+                class="-mr-1 ml-2 h-5 w-5"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                aria-hidden="true"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M19 9l-7 7-7-7"
+                />
+              </svg>
+            </button>
+
+            <div
+              id="theme-menu"
+              class="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 divide-y divide-gray-100 hidden"
+              role="menu"
+              aria-orientation="vertical"
+              aria-labelledby="theme-button"
+            >
+              <div class="py-1" role="none">
+                <button
+                  id="theme-os-default"
+                  class="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                  role="menuitem"
+                >
+                  🌗 OS Default
+                </button>
+                <button
+                  id="theme-light"
+                  class="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                  role="menuitem"
+                >
+                  ☀️ Light
+                </button>
+                <button
+                  id="theme-dark"
+                  class="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                  role="menuitem"
+                >
+                  🌙 Dark
+                </button>
+              </div>
+            </div>
+          </div>
         </header>
 
         <article class="flex flex-col items-center justify-center">
           <div class="text-center">
-            <p id="temperature" class="text-[10rem] font-bold text-center">--°</p> <!-- Suhu akan diupdate -->
-            <p id="weather-description" class="text-3xl text-center">Loading...</p> <!-- Deskripsi cuaca akan diupdate -->
+            <p id="temperature" class="text-[10rem] font-bold text-center">
+              --°
+            </p>
+            <time
+              id="current-date"
+              datetime="2024-10-15"
+              class="text-lg mr-4 text-center"
+            >
+              15.10.2024
+            </time>
+            <p id="weather-description" class="text-3xl text-center mt-2.5">
+              Loading...
+            </p>
           </div>
         </article>
 
@@ -60,19 +127,19 @@
         <section class="mt-8">
           <div class="flex items-center justify-between" id="weather-cards">
             <article
-              class="max-w-sm mx-auto bg-white shadow-lg rounded-lg overflow-hidden p-6 text-center"
+              class="max-w-sm mx-auto shadow-lg rounded-lg overflow-hidden p-6 text-center weather-card"
             >
-              <p class="text-gray-500 text-lg mb-4">Today</p>
+              <p class="text-lg mb-4">Today</p>
               <p class="text-2xl font-bold">20°</p>
-              <p class="text-sm text-gray-500">Mist</p>
+              <p class="text-sm">Mist</p>
             </article>
 
             <article
-              class="max-w-sm mx-auto bg-white shadow-lg rounded-lg overflow-hidden p-6 text-center"
+              class="max-w-sm mx-auto shadow-lg rounded-lg overflow-hidden p-6 text-center weather-card"
             >
-              <p class="text-gray-500 text-lg mb-4">Tue</p>
+              <p class="text-lg mb-4">Tue</p>
               <p class="text-2xl font-bold">32°</p>
-              <p class="text-sm text-gray-500">Sunny</p>
+              <p class="text-sm">Sunny</p>
             </article>
             <article
               class="max-w-sm mx-auto bg-white shadow-lg rounded-lg overflow-hidden p-6 text-center"
@@ -108,12 +175,12 @@
 
       <!-- Sidebar Section: Detailed Forecast -->
       <aside class="w-1/4 pl-6 pr-4 p-4 bg-[#f6f6f6]">
-        <header>
+        <header class="no-dark-mode no-dark-mode-bg">
           <p class="text-gray-600 text-2xl text-center">Good Morning</p>
           <h2 class="font-bold mb-6 text-center">12:27 PM</h2>
         </header>
 
-        <article class="text-center mb-8">
+        <article class="text-center mb-8 no-dark-mode no-dark-mode-bg">
           <h3 class="text-5xl font-semibold">20°</h3>
           <p class="text-gray-500 text-lg">Feels like 19°</p>
           <p class="text-2xl mt-2">Cloudy</p>

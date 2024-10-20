@@ -1,4 +1,109 @@
+body {
+  --bg-color: #f9fafb;
+  --text-color: #111827;
+  --card-bg-color: #ffffff;
+  --secondary-bg-color: #f6f6f6;
+  --input-bg-color: #f3f4f6;
+  --input-text-color: #111827;
+  --button-bg-color: #3b82f6;
+  --button-text-color: #ffffff;
+  --border-color: #d1d5db;
+}
+
+body.dark-mode {
+  --bg-color: #1f2937;
+  --text-color: #d1d5db;
+  --card-bg-color: #374151;
+  --secondary-bg-color: #4b5563;
+  --input-bg-color: #374151;
+  --input-text-color: #d1d5db;
+  --button-bg-color: #2563eb;
+  --button-text-color: #ffffff;
+  --border-color: #6b7280;
+}
+
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+}
+
+main,
+aside,
 .container-desktop {
-    max-width: 1200px;
-    width: 100%;
-  }
+  background-color: var(--card-bg-color);
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: var(--text-color);
+}
+
+input,
+button {
+  background-color: var(--input-bg-color);
+  color: var(--input-text-color);
+  border-color: var(--border-color);
+}
+
+button {
+  background-color: var(--button-bg-color);
+  color: var(--button-text-color);
+}
+
+article {
+  background-color: var(--card-bg-color);
+  border-color: var(--border-color);
+}
+
+.weather-card {
+  background-color: var(--card-bg-color);
+  border: 1px solid var(--border-color);
+}
+
+.text-gray-500 {
+  color: var(--text-color);
+}
+
+.no-dark-mode {
+  color: black !important;
+}
+
+.no-dark-mode-bg {
+  background-color: #f6f6f6 !important;
+}
+
+.no-dark-mode p,
+.no-dark-mode h2,
+.no-dark-mode h3 {
+  color: black !important;
+}
+
+.no-dark-mode-input {
+  background-color: #f3f4f6 !important;
+  color: #111827 !important;
+  border-color: #d1d5db !important;
+}
+
+.no-dark-mode-button {
+  background-color: #3b82f6 !important;
+  color: white !important;
+  border-color: #3b82f6 !important;
+}
+
+.hidden {
+  display: none;
+}
+
+.show {
+  display: block;
+}
+
+.container-desktop {
+  max-width: 1200px;
+  width: 100%;
+}
