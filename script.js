@@ -255,25 +255,26 @@ function formatDateCustom(date) {
 const dailyTempCustom =
   "https://api.open-meteo.com/v1/forecast?latitude=-6.1818&longitude=106.8223&daily=weather_code,temperature_2m_max,temperature_2m_min";
 
-async function fetchWeatherDataCustom() {
-  try {
-    const response = await fetch(dailyTempCustom);
-    const data = await response.json();
-
-    const todayTemp = data.daily.temperature_2m_max[0];
-    const weatherDescription = getWeatherDescriptionCustom(
-      data.daily.weather_code[0]
-    );
-
-    document.getElementById("temperature").textContent = `${Math.round(
-      todayTemp
-    )}°`;
-    document.getElementById("weather-description").textContent =
-      weatherDescription;
-  } catch (error) {
-    console.log(error);
+  async function fetchWeatherDataCustom() {
+    try {
+      const response = await fetch(dailyTempCustom);
+      const data = await response.json();
+  
+      const todayTemp = data.daily.temperature_2m_max[0];
+      const weatherDescription = getWeatherDescriptionCustom(
+        data.daily.weather_code[0]
+      );
+  
+      // Update kedua elemen dengan ID yang berbeda
+      document.getElementById("temperatureH3").textContent = `${Math.round(todayTemp)}°`;
+      document.getElementById("temperatureP").textContent = `${Math.round(todayTemp)}°`;
+  
+      document.getElementById("weather-description").textContent = weatherDescription;
+    } catch (error) {
+      console.log(error);
+    }
   }
-}
+  
 
 function getWeatherDescriptionCustom(code) {
   const weatherCodes = {
@@ -301,3 +302,30 @@ function getWeatherDescriptionCustom(code) {
 }
 
 fetchWeatherDataCustom();
+
+const ctx = document.getElementById("temperatureChart").getContext("2d");
+const temperatureChart = new Chart(ctx, {
+  type: "line",
+  data: {
+    labels: ["1 PM", "2 PM", "3 PM", "4 PM", "5 PM", "6 PM"],
+    datasets: [
+      {
+        label: "Temperature",
+        data: [20, 21, 21, 20, 21, 21],
+        borderColor: "rgba(75, 192, 192, 1)",
+        borderWidth: 2,
+        fill: false,
+      },
+    ],
+  },
+  options: {
+    responsive: true,
+    scales: {
+      y: {
+        beginAtZero: false,
+        suggestedMin: 10,
+        suggestedMax: 30,
+      },
+    },
+  },
+});

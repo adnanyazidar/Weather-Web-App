@@ -5,7 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Weather Dashboard</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
   </head>
 
   <body class="bg-gray-100 flex items-center justify-center min-h-screen">
@@ -14,6 +17,14 @@
       <section class="w-3/4 pr-8 mr-4 p-6">
         <header class="flex justify-between items-center mb-6">
           <h1 id="city-heading" class="text-2xl font-semibold">Jakarta</h1>
+
+          <style>
+            /* Hilangkan icon x (clear) dari input search */
+            input[type="search"]::-webkit-search-cancel-button {
+              -webkit-appearance: none;
+              appearance: none;
+            }
+          </style>
 
           <div class="relative w-full max-w-md mx-8 no-dark-mode">
             <input
@@ -111,7 +122,7 @@
 
         <article class="flex flex-col items-center justify-center">
           <div class="flex items-center justify-center">
-            <p id="temperature" class="text-[10rem] font-bold text-center">
+            <p id="temperatureP" class="text-[10rem] font-bold text-center">
               --°
             </p>
             <!-- Container untuk ikon angin dan kelembaban -->
@@ -147,38 +158,50 @@
         <!-- 5-day Weather Forecast -->
         <section class="mt-8">
           <div id="weather-cards" class="grid grid-cols-1 lg:grid-cols-5 gap-4">
-            <article class="shadow-lg rounded-lg overflow-hidden p-6 text-center weather-card">
+            <article
+              class="shadow-lg rounded-lg overflow-hidden p-6 text-center weather-card"
+            >
               <p class="text-lg mb-4">Today</p>
               <p class="text-2xl font-bold">20°</p>
               <p class="text-sm">Mist</p>
             </article>
-        
-            <article class="shadow-lg rounded-lg overflow-hidden p-6 text-center weather-card">
+
+            <article
+              class="shadow-lg rounded-lg overflow-hidden p-6 text-center weather-card"
+            >
               <p class="text-lg mb-4">Tue</p>
               <p class="text-2xl font-bold">32°</p>
               <p class="text-sm">Sunny</p>
             </article>
-        
-            <article class="shadow-lg rounded-lg overflow-hidden p-6 text-center weather-card">
+
+            <article
+              class="shadow-lg rounded-lg overflow-hidden p-6 text-center weather-card"
+            >
               <p class="text-lg mb-4">Wed</p>
               <p class="text-2xl font-bold">12°</p>
               <p class="text-sm">Rainy</p>
             </article>
-        
-            <article class="shadow-lg rounded-lg overflow-hidden p-6 text-center weather-card">
+
+            <article
+              class="shadow-lg rounded-lg overflow-hidden p-6 text-center weather-card"
+            >
               <p class="text-lg mb-4">Thu</p>
               <p class="text-2xl font-bold">13°</p>
               <p class="text-sm">Rainy</p>
             </article>
-        
-            <article class="shadow-lg rounded-lg overflow-hidden p-6 text-center weather-card">
+
+            <article
+              class="shadow-lg rounded-lg overflow-hidden p-6 text-center weather-card"
+            >
               <p class="text-lg mb-4">Fri</p>
               <p class="text-2xl font-bold">22°</p>
               <p class="text-sm">Mist</p>
             </article>
-        
+
             <div class="flex justify-center col-span-full">
-              <article class="shadow-lg rounded-lg overflow-hidden p-6 text-center weather-card">
+              <article
+                class="shadow-lg rounded-lg overflow-hidden p-6 text-center weather-card"
+              >
                 <p class="text-lg mb-4">Sat</p>
                 <p class="text-2xl font-bold">22°</p>
                 <p class="text-sm">Mist</p>
@@ -186,77 +209,134 @@
             </div>
           </div>
         </section>
-        
       </section>
 
       <!-- Sidebar Section: Detailed Forecast -->
-      <aside class="w-1/4 pl-6 pr-4 p-4 bg-[#f6f6f6]">
-        <header class="no-dark-mode no-dark-mode-bg">
-          <p class="text-gray-600 text-2xl text-center">Good Morning</p>
-          <h2 class="font-bold mb-6 text-center">12:27 PM</h2>
+      <aside
+        class="w-1/4 pl-6 pr-4 p-4 bg-gradient-to-b from-blue-500 to-blue-200 text-white rounded-xl shadow-xl relative overflow-hidden"
+      >
+        <!-- Notification for Extreme Weather -->
+        <section
+          class="bg-red-500 text-white p-4 rounded-lg mb-6 animate-pulse"
+        >
+          <p class="text-center font-bold">
+            🚨 Weather Alert: Heavy Rain Expected
+          </p>
+        </section>
+
+        <!-- Glassmorphism Header -->
+        <header
+          class="bg-white/10 backdrop-blur-sm p-4 rounded-xl mb-6 text-center shadow-md"
+        >
+          <p class="text-gray-200 text-2xl">Good Morning</p>
+          <h2 class="font-bold text-4xl">12:27 PM</h2>
         </header>
 
-        <article class="text-center mb-8 no-dark-mode no-dark-mode-bg">
-          <h3 class="text-5xl font-semibold">20°</h3>
-          <p class="text-gray-500 text-lg">Feels like 19°</p>
-          <p class="text-2xl mt-2">Cloudy</p>
+        <!-- Temperature and Condition -->
+        <article
+          class="bg-white/10 backdrop-blur-md p-6 rounded-xl text-center shadow-lg mb-8"
+        >
+          <div class="flex items-center justify-center">
+            <h3 class="text-6xl font-extrabold drop-shadow-lg" id="temperatureH3">
+              20°
+            </h3>
+            <div class="flex flex-col items-start ml-4 text-left mt-6">
+              <div class="flex items-center space-x-2">
+                <img src="./images/icons/wind.svg" alt="Wind" class="w-7 h-7" />
+                <span id="wind-speed" class="text-base">-- mph</span>
+              </div>
+              <div class="flex items-center space-x-2 mt-2">
+                <img
+                  src="./images/icons/humidity.svg"
+                  alt="Humidity"
+                  class="w-7 h-7"
+                />
+                <span id="humidity" class="text-base">--%</span>
+              </div>
+            </div>
+          </div>
+          <p class="text-gray-300 text-lg mt-2">Feels like 19°</p>
+          <p class="text-2xl mt-4 animate-bounce">☁️ Cloudy</p>
         </article>
 
         <!-- Hourly Forecast -->
         <section>
-          <h2 class="text-gray-500 text-lg mb-4 text-center">
+          <h2 class="text-gray-200 text-xl mb-4 text-center">
             Hourly Forecast
           </h2>
-          <div class="grid grid-cols-3 gap-x-4 gap-y-4 text-center">
+          <div class="grid grid-cols-3 gap-6">
+            <!-- Forecast Card with Hover Effect -->
             <article
-              class="flex flex-col items-center justify-center w-20 h-32 border border-gray-300 rounded-lg p-4 bg-transparent"
+              class="flex flex-col items-center justify-center w-full h-36 bg-white/30 backdrop-blur-md border border-gray-200 rounded-xl p-4 shadow-md transition transform hover:scale-105"
             >
-              <p class="text-sm text-gray-500">1 PM</p>
-              <p class="text-3xl font-bold text-gray-700">20°</p>
-              <p class="text-sm text-gray-500 mt-1">Cloudy</p>
+              <p class="text-sm text-black">1 PM</p>
+              <p class="text-3xl font-bold text-black">20°</p>
+              <p class="text-sm text-black mt-1">☁️ Cloudy</p>
             </article>
 
             <article
-              class="flex flex-col items-center justify-center w-20 h-32 border border-gray-300 rounded-lg p-4 bg-transparent"
+              class="flex flex-col items-center justify-center w-full h-36 bg-white/30 backdrop-blur-md border border-gray-200 rounded-xl p-4 shadow-md transition transform hover:scale-105"
             >
-              <p class="text-sm text-gray-500">2 PM</p>
-              <p class="text-3xl font-bold text-gray-700">21°</p>
-              <p class="text-sm text-gray-500">Rainy</p>
+              <p class="text-sm text-black">2 PM</p>
+              <p class="text-3xl font-bold text-black">21°</p>
+              <p class="text-sm text-black">🌧 Rainy</p>
             </article>
 
             <article
-              class="flex flex-col items-center justify-center w-20 h-32 border border-gray-300 rounded-lg p-4 bg-transparent"
+              class="flex flex-col items-center justify-center w-full h-36 bg-white/30 backdrop-blur-md border border-gray-200 rounded-xl p-4 shadow-md transition transform hover:scale-105"
             >
-              <p class="text-sm text-gray-500">3 PM</p>
-              <p class="text-3xl font-bold text-gray-700">21°</p>
-              <p class="text-sm text-gray-500">Rainy</p>
+              <p class="text-sm text-black">3 PM</p>
+              <p class="text-3xl font-bold text-black">21°</p>
+              <p class="text-sm text-black">🌧 Rainy</p>
             </article>
 
             <article
-              class="flex flex-col items-center justify-center w-20 h-32 border border-gray-300 rounded-lg p-4 bg-transparent"
+              class="flex flex-col items-center justify-center w-full h-36 bg-white/30 backdrop-blur-md border border-gray-200 rounded-xl p-4 shadow-md transition transform hover:scale-105"
             >
-              <p class="text-sm text-gray-500">4 PM</p>
-              <p class="text-3xl font-bold text-gray-700">20°</p>
-              <p class="text-sm text-gray-500">Cloudy</p>
+              <p class="text-sm text-black">4 PM</p>
+              <p class="text-3xl font-bold text-black">20°</p>
+              <p class="text-sm text-black mt-1">☁️ Cloudy</p>
             </article>
 
             <article
-              class="flex flex-col items-center justify-center w-20 h-32 border border-gray-300 rounded-lg p-4 bg-transparent"
+              class="flex flex-col items-center justify-center w-full h-36 bg-white/30 backdrop-blur-md border border-gray-200 rounded-xl p-4 shadow-md transition transform hover:scale-105"
             >
-              <p class="text-sm text-gray-500">5 PM</p>
-              <p class="text-3xl font-bold text-gray-700">21°</p>
-              <p class="text-sm text-gray-500">Rainy</p>
+              <p class="text-sm text-black">5 PM</p>
+              <p class="text-3xl font-bold text-black">21°</p>
+              <p class="text-sm text-black">🌧 Rainy</p>
             </article>
 
             <article
-              class="flex flex-col items-center justify-center w-20 h-32 border border-gray-300 rounded-lg p-4 bg-transparent"
+              class="flex flex-col items-center justify-center w-full h-36 bg-white/30 backdrop-blur-md border border-gray-200 rounded-xl p-4 shadow-md transition transform hover:scale-105"
             >
-              <p class="text-sm text-gray-500">6 PM</p>
-              <p class="text-3xl font-bold text-gray-700">21°</p>
-              <p class="text-sm text-gray-500">Rainy</p>
+              <p class="text-sm text-black">6 PM</p>
+              <p class="text-3xl font-bold text-black">21°</p>
+              <p class="text-sm text-black">🌧 Rainy</p>
             </article>
           </div>
         </section>
+
+        <!-- Temperature Trend Chart with Gradient Background -->
+        <!-- <section class="mt-8">
+          <h2 class="text-gray-200 text-xl mb-4 text-center">
+            Temperature Trend
+          </h2>
+          <div
+            class="bg-gradient-to-r from-blue-500 to-purple-500 p-6 rounded-xl shadow-lg"
+          >
+            <canvas id="temperatureChart" class="w-full h-48"></canvas>
+          </div>
+        </section> -->
+
+        <!-- Animated Weather Icon and Background Elements -->
+        <div class="absolute inset-0 pointer-events-none">
+          <div
+            class="absolute w-64 h-64 bg-yellow-300 rounded-full opacity-20 -top-32 -right-24 animate-spin-slow"
+          ></div>
+          <div
+            class="absolute w-48 h-48 bg-white rounded-full opacity-10 bottom-10 left-10 animate-pulse"
+          ></div>
+        </div>
       </aside>
     </main>
 
