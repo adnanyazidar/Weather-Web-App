@@ -1,12 +1,34 @@
+// Fungsi untuk mengubah tema berdasarkan waktu
+function applyAutoTheme() {
+  const currentHour = new Date().getHours(); // Dapatkan jam saat ini (0-23)
+
+  if (currentHour >= 6 && currentHour < 18) {
+    // Siang (06:00 - 18:00)
+    document.body.classList.remove("dark-mode");
+    localStorage.setItem("theme", "light");
+    themeIcon.textContent = "☀️";
+  } else {
+    // Malam (18:00 - 06:00)
+    document.body.classList.add("dark-mode");
+    localStorage.setItem("theme", "dark");
+    themeIcon.textContent = "🌙";
+  }
+}
+
+// Atur tema secara otomatis saat halaman dimuat
+document.addEventListener("DOMContentLoaded", () => {
+  applyAutoTheme(); // Terapkan tema otomatis saat halaman dimuat
+
+  // Periksa setiap jam apakah perlu mengubah tema
+  setInterval(applyAutoTheme, 3600000); // Periksa tema setiap jam (3600000ms = 1 jam)
+});
+
 const themeButton = document.getElementById("theme-button");
 const themeMenu = document.getElementById("theme-menu");
 const themeIcon = document.getElementById("theme-icon");
-
-
 themeButton.addEventListener("click", () => {
   themeMenu.classList.toggle("hidden");
 });
-
 
 document.getElementById("theme-os-default").addEventListener("click", () => {
   document.body.classList.remove("dark-mode");
@@ -29,7 +51,6 @@ document.getElementById("theme-dark").addEventListener("click", () => {
   themeMenu.classList.add("hidden");
 });
 
-
 window.addEventListener("load", () => {
   const savedTheme = localStorage.getItem("theme");
   if (savedTheme === "dark") {
@@ -39,7 +60,7 @@ window.addEventListener("load", () => {
     document.body.classList.remove("dark-mode");
     themeIcon.textContent = "☀️";
   } else {
-    themeIcon.textContent = "🌗"; 
+    themeIcon.textContent = "🌗";
   }
 });
 
@@ -66,14 +87,12 @@ document.addEventListener("DOMContentLoaded", () => {
   currentDateElement.textContent = dateFormattedFull(today);
 });
 
-
 async function getWeatherByCity() {
   const city = document.getElementById("city").value;
   if (!city) {
     alert("Please enter a city name");
     return;
   }
-
 
   document.getElementById("fetch-loading").style.display = "block";
 
@@ -83,7 +102,6 @@ async function getWeatherByCity() {
     );
     const responseJson = await response.json();
 
-   
     if (!responseJson.results || responseJson.results.length === 0) {
       alert("City not found");
       document.getElementById("fetch-loading").style.display = "none";
@@ -98,26 +116,20 @@ async function getWeatherByCity() {
     localStorage.setItem("latitude", latitude);
     localStorage.setItem("longitude", longitude);
 
-    
     getWeather(latitude, longitude);
 
-    
     document.getElementById("city-heading").innerHTML = cityName;
 
-    
     document.getElementById("city-name").innerHTML = `Weather in ${cityName}`;
 
- 
     document.getElementById("city").value = "";
   } catch (error) {
     console.error("Error fetching weather data:", error);
     alert("Error fetching weather data. Please try again.");
   } finally {
-    
     document.getElementById("fetch-loading").style.display = "none";
   }
 }
-
 
 document
   .getElementById("search-button")
@@ -129,11 +141,9 @@ document.addEventListener("DOMContentLoaded", () => {
   const savedLongitude = localStorage.getItem("longitude");
 
   if (savedCity && savedLatitude && savedLongitude) {
-  
     document.getElementById("city-heading").innerHTML = savedCity;
     getWeather(savedLatitude, savedLongitude);
   } else {
-    
     getLocation();
   }
 });
@@ -149,26 +159,35 @@ async function getWeather(latitude, longitude) {
 
     const weatherCardsContainer = document.getElementById("weather-cards");
 
-    weatherCardsContainer.innerHTML = "";
+    weatherCardsContainer.innerHTML = ""; // Kosongkan kontainer sebelum memasukkan data baru
 
     data.daily.time.forEach((date, index) => {
       const maxTemp = data.daily.temperature_2m_max[index];
-      const weatherDescription = getWeatherDescription(
-        data.daily.weather_code[index]
-      );
+      const weatherCode = data.daily.weather_code[index];
+      const weatherDescription = weatherIcons[weatherCode]?.name || "Unknown";
+      const weatherIcon = weatherIcons[weatherCode]?.image || "./images/icons/unknown.svg"; // Default ikon jika kode tidak ditemukan
 
       weatherCardsContainer.innerHTML += `
-          <article class="max-w-sm mx-auto bg-white shadow-lg rounded-lg overflow-hidden p-6 text-center">
-            <p class="text-gray-500 text-lg mb-4">${dateFormatted(date)}</p> 
-            <p class="text-2xl font-bold">${maxTemp}°</p>
-            <p class="text-sm text-gray-500">${weatherDescription}</p>
-          </article>
-        `;
+        <article class="max-w-sm mx-auto bg-white shadow-lg rounded-lg overflow-hidden p-6 text-center">
+          <p class="text-gray-500 text-lg mb-4">${dateFormatted(date)}</p> 
+          <img src="${weatherIcon}" alt="${weatherDescription}" class="w-12 h-12 mx-auto mb-2">
+          <p class="text-2xl font-bold">${maxTemp}°</p>
+          <p class="text-sm text-gray-500">${weatherDescription}</p>
+        </article>
+      `;
     });
   } catch (error) {
     console.log("Error fetching weather data:", error);
   }
 }
+
+// Helper function to format date
+function dateFormatted(date) {
+  const options = { weekday: "long", year: "numeric", month: "short", day: "numeric" };
+  const dateObj = new Date(date);
+  return dateObj.toLocaleDateString("en-US", options);
+}
+
 
 function dateFormatted(date) {
   const options = {

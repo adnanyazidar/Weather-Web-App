@@ -1,3 +1,4 @@
+/* Default light mode */
 body {
   --bg-color: #f9fafb;
   --text-color: #111827;
@@ -10,138 +11,20 @@ body {
   --border-color: #d1d5db;
 }
 
-body.dark-mode {
-  --bg-color: #1f2937;
-  --text-color: #d1d5db;
-  --card-bg-color: #374151;
-  --secondary-bg-color: #4b5563;
-  --input-bg-color: #374151;
-  --input-text-color: #d1d5db;
-  --button-bg-color: #2563eb;
-  --button-text-color: #ffffff;
-  --border-color: #6b7280;
-}
-
 body {
   background-color: var(--bg-color);
   color: var(--text-color);
 }
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-}
 
-.container {
-  padding: 20px;
-}
-
-.header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-}
-
-.header h1 {
-  font-size: 24px;
-}
-
-.search-bar input {
-  padding: 10px;
-  margin-right: 5px;
-}
-
-.theme-dropdown {
-  position: relative;
-}
-
-.theme-dropdown ul {
-  display: none;
-  position: absolute;
-  top: 100%;
-  left: 0;
-  background-color: white;
-  border: 1px solid #ccc;
-  padding: 10px;
-  list-style: none;
-}
-
-.theme-dropdown:hover ul {
-  display: block;
-}
-
-.weather-summary {
-  text-align: center;
-}
-
-.weather-summary p {
-  margin: 10px 0;
-}
-
-.weather-cards {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 10px;
-  margin-top: 20px;
-}
-
-.card {
-  background-color: #f1f1f1;
-  padding: 20px;
-  text-align: center;
-  border-radius: 5px;
-}
-
-/* Sidebar default style for mobile */
-.sidebar {
-  margin-top: 20px;
-  background-color: #f6f6f6;
-  padding: 20px;
-}
-
-/* Tablet and above (768px+) */
-@media (min-width: 768px) {
-  .container {
-    display: flex;
-    justify-content: space-between;
-  }
-
-  .content {
-    width: 70%;
-  }
-
-  .sidebar {
-    width: 30%;
-    margin-top: 0;
-  }
-}
-
-/* Laptop and above (1024px+) */
-@media (min-width: 1024px) {
-  .weather-cards {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-/* Larger desktop (1280px+) */
-@media (min-width: 1280px) {
-  .weather-cards {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
-main,
-aside,
 .container-desktop {
+  max-width: 1200px;
+  width: 100%;
   background-color: var(--card-bg-color);
+  color: var(--text-color);
 }
 
-p,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
+/* Main section */
+header {
   color: var(--text-color);
 }
 
@@ -157,55 +40,142 @@ button {
   color: var(--button-text-color);
 }
 
-article {
-  background-color: var(--card-bg-color);
-  border-color: var(--border-color);
-}
-
-.weather-card {
-  background-color: var(--card-bg-color);
-  border: 1px solid var(--border-color);
-}
-
-.text-gray-500 {
+aside {
+  background-color: var(--secondary-bg-color);
   color: var(--text-color);
 }
 
+/* Weather cards */
+.weather-card {
+  background-color: var(--card-bg-color);
+  border: 1px solid var(--border-color);
+  color: var(--text-color);
+}
+
+.hourly-forecast article {
+  background-color: var(--card-bg-color);
+  border-color: var(--border-color);
+  color: var(--text-color);
+}
+
+/* Dark mode */
+body.dark-mode {
+  --bg-color: #202124;
+  --text-color: #e8eaed;
+  --card-bg-color: #303134;
+  --secondary-bg-color: #282a2d;
+  --input-bg-color: #303134;
+  --input-text-color: #e8eaed;
+  --button-bg-color: #5f6368;
+  --button-text-color: #ffffff;
+  --border-color: #5f6368;
+}
+
+body.dark-mode {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+}
+
+.container-desktop.dark-mode {
+  background-color: var(--card-bg-color);
+  color: var(--text-color);
+}
+
+aside.dark-mode {
+  background-color: var(--secondary-bg-color);
+  color: var(--text-color);
+}
+
+input.dark-mode,
+button.dark-mode {
+  background-color: var(--input-bg-color);
+  color: var(--input-text-color);
+  border-color: var(--border-color);
+}
+
+button.dark-mode {
+  background-color: var(--button-bg-color);
+  color: var(--button-text-color);
+}
+
+/* Weather cards for dark mode */
+.weather-card.dark-mode {
+  background-color: var(--card-bg-color);
+  border: 1px solid var(--border-color);
+  color: var(--text-color);
+}
+
+.hourly-forecast article.dark-mode {
+  background-color: var(--card-bg-color);
+  border-color: var(--border-color);
+  color: var(--text-color);
+}
+
+input {
+  background-color: white; /* Background terang */
+  color: black; /* Warna teks hitam */
+}
+
+/* Warna teks dan background input dalam mode gelap */
+body.dark-mode input {
+  background-color: white; /* Background gelap */
+  color: black; /* Warna teks terang */
+}
+
+/* Pastikan border juga terlihat jelas di mode gelap */
+body.dark-mode input {
+  border-color: white; /* Warna border abu-abu gelap */
+}
+
+/* Mode default untuk dropdown tema (selalu light mode) */
+#theme-menu {
+  background-color: white; /* Tetap cerah */
+  color: #111827; /* Warna teks tetap gelap */
+  border: 1px solid #d1d5db; /* Border abu-abu terang */
+}
+
+#theme-menu button {
+  background-color: transparent;
+  color: #111827; /* Warna teks tetap gelap */
+  display: flex;
+  align-items: center;
+  padding: 10px 15px;
+  font-size: 16px;
+  width: 100%;
+}
+
+#theme-menu button:hover {
+  background-color: #e5e7eb; /* Efek hover */
+}
+
+#theme-menu button svg {
+  margin-right: 10px;
+}
+
+/* Khusus untuk mode dark, pastikan dropdown tetap cerah */
+body.dark-mode #theme-menu {
+  background-color: white; /* Background cerah meski di dark mode */
+  color: #111827; /* Warna teks tetap gelap */
+}
+
+body.dark-mode #theme-menu button {
+  color: #111827; /* Warna teks tombol tetap gelap */
+}
+
+body.dark-mode #theme-menu button:hover {
+  background-color: white; /* Hover tetap terang */
+}
+
 .no-dark-mode {
-  color: black !important;
+  color: black !important; /* Warna teks tetap hitam */
 }
 
 .no-dark-mode-bg {
-  background-color: #f6f6f6 !important;
+  background-color: #f6f6f6 !important; /* Warna background tetap */
 }
 
-.no-dark-mode p,
-.no-dark-mode h2,
-.no-dark-mode h3 {
+/* Atur elemen teks yang tidak boleh terkena dark mode */
+/* .no-dark-mode h2,
+.no-dark-mode h3,
   color: black !important;
-}
-
-.no-dark-mode-input {
-  background-color: #f3f4f6 !important;
-  color: #111827 !important;
-  border-color: #d1d5db !important;
-}
-
-.no-dark-mode-button {
-  background-color: #3b82f6 !important;
-  color: white !important;
-  border-color: #3b82f6 !important;
-}
-
-.hidden {
-  display: none;
-}
-
-.show {
-  display: block;
-}
-
-.container-desktop {
-  max-width: 1200px;
-  width: 100%;
-}
+} */
