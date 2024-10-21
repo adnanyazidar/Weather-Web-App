@@ -1,6 +1,5 @@
-// Fungsi untuk mengubah tema berdasarkan waktu
 function applyAutoTheme() {
-  const currentHour = new Date().getHours(); // Dapatkan jam saat ini (0-23)
+  const currentHour = new Date().getHours();
 
   if (currentHour >= 6 && currentHour < 18) {
     // Siang (06:00 - 18:00)
@@ -15,12 +14,10 @@ function applyAutoTheme() {
   }
 }
 
-// Atur tema secara otomatis saat halaman dimuat
 document.addEventListener("DOMContentLoaded", () => {
-  applyAutoTheme(); // Terapkan tema otomatis saat halaman dimuat
+  applyAutoTheme();
 
-  // Periksa setiap jam apakah perlu mengubah tema
-  setInterval(applyAutoTheme, 3600000); // Periksa tema setiap jam (3600000ms = 1 jam)
+  setInterval(applyAutoTheme, 3600000);
 });
 
 const themeButton = document.getElementById("theme-button");
@@ -159,35 +156,39 @@ async function getWeather(latitude, longitude) {
 
     const weatherCardsContainer = document.getElementById("weather-cards");
 
-    weatherCardsContainer.innerHTML = ""; // Kosongkan kontainer sebelum memasukkan data baru
+    weatherCardsContainer.innerHTML = "";
 
     data.daily.time.forEach((date, index) => {
       const maxTemp = data.daily.temperature_2m_max[index];
       const weatherCode = data.daily.weather_code[index];
       const weatherDescription = weatherIcons[weatherCode]?.name || "Unknown";
-      const weatherIcon = weatherIcons[weatherCode]?.image || "./images/icons/unknown.svg"; // Default ikon jika kode tidak ditemukan
+      const weatherIcon =
+        weatherIcons[weatherCode]?.image || "./images/icons/unknown.svg";
 
       weatherCardsContainer.innerHTML += `
-        <article class="max-w-sm mx-auto bg-white shadow-lg rounded-lg overflow-hidden p-6 text-center">
-          <p class="text-gray-500 text-lg mb-4">${dateFormatted(date)}</p> 
-          <img src="${weatherIcon}" alt="${weatherDescription}" class="w-12 h-12 mx-auto mb-2">
-          <p class="text-2xl font-bold">${maxTemp}°</p>
-          <p class="text-sm text-gray-500">${weatherDescription}</p>
-        </article>
-      `;
+      <article class="weather-card shadow-lg rounded-lg overflow-hidden p-6 text-center">
+        <p class="text-gray-500 text-lg mb-4">${dateFormatted(date)}</p> 
+        <img src="${weatherIcon}" alt="${weatherDescription}" class="w-12 h-12 mx-auto mb-2">
+        <p class="text-2xl font-bold">${maxTemp}°</p>
+        <p class="text-sm text-gray-500">${weatherDescription}</p>
+      </article>
+    `;
     });
   } catch (error) {
     console.log("Error fetching weather data:", error);
   }
 }
 
-// Helper function to format date
 function dateFormatted(date) {
-  const options = { weekday: "long", year: "numeric", month: "short", day: "numeric" };
+  const options = {
+    weekday: "long",
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+  };
   const dateObj = new Date(date);
   return dateObj.toLocaleDateString("en-US", options);
 }
-
 
 function dateFormatted(date) {
   const options = {
