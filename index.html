@@ -13,19 +13,15 @@
 
   <body class="bg-gray-100 flex items-center justify-center min-h-screen">
     <main class="rounded-lg shadow-lg flex container-desktop">
-      <!-- Main Section: Weather Overview -->
       <section class="w-3/4 pr-8 mr-4 p-6">
         <header class="flex justify-between items-center mb-6">
           <h1 id="city-heading" class="text-2xl font-semibold">Jakarta</h1>
-
           <style>
-            /* Hilangkan icon x (clear) dari input search */
             input[type="search"]::-webkit-search-cancel-button {
               -webkit-appearance: none;
               appearance: none;
             }
           </style>
-
           <div class="relative w-full max-w-md mx-8 no-dark-mode">
             <input
               type="search"
@@ -56,10 +52,8 @@
               <span class="sr-only">Search</span>
             </button>
           </div>
-
           <p id="city-name"></p>
           <div id="fetch-loading" style="display: none">Loading...</div>
-
           <div class="relative inline-block text-left">
             <button
               id="theme-button"
@@ -85,7 +79,6 @@
                 />
               </svg>
             </button>
-
             <div
               id="theme-menu"
               class="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 divide-y divide-gray-100 hidden"
@@ -151,7 +144,6 @@
           <p id="weather-description" class="text-3xl text-center mt-2.5"></p>
         </article>
 
-        <!-- 5-day Weather Forecast -->
         <section class="mt-8">
           <div id="weather-cards" class="grid grid-cols-1 lg:grid-cols-5 gap-4">
             <article
@@ -206,7 +198,6 @@
           </div>
         </section>
       </section>
-
       <aside
         class="w-1/4 pl-6 pr-4 p-4 bg-gradient-to-b from-blue-500 to-blue-200 text-white rounded-xl shadow-xl relative overflow-hidden"
       >
@@ -248,7 +239,6 @@
               >
             </div>
 
-            <!-- Kelembapan -->
             <div class="flex items-center space-x-2">
               <img
                 src="./images/icons/humidity.svg"
@@ -259,12 +249,10 @@
             </div>
           </div>
 
-          <!-- Informasi Tambahan -->
           <p id="feels-like" class="text-lg mt-4 text-white">Feels like 19°</p>
           <p id="weather-status" class="text-3xl mt-4 text-white">☁️ Cloudy</p>
         </article>
 
-        <!-- Hourly Forecast -->
         <section>
           <h2 class="text-gray-200 text-xl mb-4 mt-4 text-center">
             Hourly Forecast
@@ -318,7 +306,6 @@
         </div>
       </aside>
     </main>
-
     <script src="script.js"></script>
     <script src="icons.js"></script>
   </body>

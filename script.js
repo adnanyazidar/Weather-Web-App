@@ -189,7 +189,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }, 3600000);
 
-  // Initialize date and time
   function initializeDate() {
     const currentDateElement = document.getElementById("current-date");
     const today = new Date();
