@@ -9,11 +9,26 @@ body {
   --button-bg-color: #3b82f6;
   --button-text-color: #ffffff;
   --border-color: #d1d5db;
-}
 
-body {
   background-color: var(--bg-color);
   color: var(--text-color);
+}
+
+.forecast-card {
+  @apply flex flex-col items-center justify-center w-full h-40 bg-white/30 backdrop-blur-md border border-gray-200 rounded-xl p-4 shadow-md transition transform hover:scale-105;
+  max-width: 100px;
+}
+
+#weather-container {
+  @apply grid grid-cols-3 gap-4;
+}
+
+.forecast-card p {
+  @apply text-xs md:text-sm;
+}
+
+.forecast-card .temperature {
+  @apply text-2xl font-bold;
 }
 
 .container-desktop {
@@ -46,15 +61,10 @@ aside {
 }
 
 /* Weather cards */
-.weather-card {
-  background-color: var(--card-bg-color);
-  border: 1px solid var(--border-color);
-  color: var(--text-color);
-}
-
+.weather-card,
 .hourly-forecast article {
   background-color: var(--card-bg-color);
-  border-color: var(--border-color);
+  border: 1px solid var(--border-color);
   color: var(--text-color);
 }
 
@@ -69,20 +79,14 @@ body.dark-mode {
   --button-bg-color: #5f6368;
   --button-text-color: #ffffff;
   --border-color: #5f6368;
-}
 
-body.dark-mode {
   background-color: var(--bg-color);
   color: var(--text-color);
 }
 
-.container-desktop.dark-mode {
-  background-color: var(--card-bg-color);
-  color: var(--text-color);
-}
-
+.container-desktop.dark-mode,
 aside.dark-mode {
-  background-color: var(--secondary-bg-color);
+  background-color: var(--card-bg-color);
   color: var(--text-color);
 }
 
@@ -98,45 +102,35 @@ button.dark-mode {
   color: var(--button-text-color);
 }
 
-/* Weather cards for dark mode */
-.weather-card.dark-mode {
+.weather-card.dark-mode,
+.hourly-forecast article.dark-mode {
   background-color: var(--card-bg-color);
   border: 1px solid var(--border-color);
   color: var(--text-color);
 }
 
-.hourly-forecast article.dark-mode {
-  background-color: var(--card-bg-color);
-  border-color: var(--border-color);
-  color: var(--text-color);
-}
 
 input {
-  background-color: white; /* Background terang */
-  color: black; /* Warna teks hitam */
+  background-color: white; 
+  color: black; 
 }
 
-/* Warna teks dan background input dalam mode gelap */
 body.dark-mode input {
-  background-color: white; /* Background gelap */
-  color: black; /* Warna teks terang */
+  background-color: white; 
+  color: black; 
+  border-color: white; 
 }
 
-/* Pastikan border juga terlihat jelas di mode gelap */
-body.dark-mode input {
-  border-color: white; /* Warna border abu-abu gelap */
-}
 
-/* Mode default untuk dropdown tema (selalu light mode) */
 #theme-menu {
-  background-color: white; /* Tetap cerah */
-  color: #111827; /* Warna teks tetap gelap */
-  border: 1px solid #d1d5db; /* Border abu-abu terang */
+  background-color: white;
+  color: #111827;
+  border: 1px solid #d1d5db;
 }
 
 #theme-menu button {
   background-color: transparent;
-  color: #111827; /* Warna teks tetap gelap */
+  color: #111827;
   display: flex;
   align-items: center;
   padding: 10px 15px;
@@ -145,37 +139,29 @@ body.dark-mode input {
 }
 
 #theme-menu button:hover {
-  background-color: #e5e7eb; /* Efek hover */
+  background-color: #e5e7eb;
 }
 
 #theme-menu button svg {
   margin-right: 10px;
 }
 
-/* Khusus untuk mode dark, pastikan dropdown tetap cerah */
-body.dark-mode #theme-menu {
-  background-color: white; /* Background cerah meski di dark mode */
-  color: #111827; /* Warna teks tetap gelap */
-}
 
+body.dark-mode #theme-menu,
 body.dark-mode #theme-menu button {
-  color: #111827; /* Warna teks tombol tetap gelap */
+  background-color: white;
+  color: #111827;
 }
 
 body.dark-mode #theme-menu button:hover {
-  background-color: white; /* Hover tetap terang */
+  background-color: white;
 }
 
+
 .no-dark-mode {
-  color: black !important; /* Warna teks tetap hitam */
+  color: black !important;
 }
 
 .no-dark-mode-bg {
-  background-color: #f6f6f6 !important; /* Warna background tetap */
+  background-color: #f6f6f6 !important;
 }
-
-/* Atur elemen teks yang tidak boleh terkena dark mode */
-/* .no-dark-mode h2,
-.no-dark-mode h3,
-  color: black !important;
-} */

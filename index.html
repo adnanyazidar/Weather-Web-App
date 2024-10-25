@@ -125,7 +125,6 @@
             <p id="temperatureP" class="text-[10rem] font-bold text-center">
               --°
             </p>
-            <!-- Container untuk ikon angin dan kelembaban -->
             <div class="flex flex-col items-start ml-4 text-left mt-6">
               <div class="flex items-center space-x-2">
                 <img src="./images/icons/wind.svg" alt="Wind" class="w-7 h-7" />
@@ -142,7 +141,6 @@
             </div>
           </div>
 
-          <!-- Tanggal dan deskripsi cuaca -->
           <time
             id="current-date"
             datetime="2024-10-15"
@@ -150,9 +148,7 @@
           >
             15.10.2024
           </time>
-          <p id="weather-description" class="text-3xl text-center mt-2.5">
-            Loading...
-          </p>
+          <p id="weather-description" class="text-3xl text-center mt-2.5"></p>
         </article>
 
         <!-- 5-day Weather Forecast -->
@@ -211,124 +207,107 @@
         </section>
       </section>
 
-      <!-- Sidebar Section: Detailed Forecast -->
       <aside
         class="w-1/4 pl-6 pr-4 p-4 bg-gradient-to-b from-blue-500 to-blue-200 text-white rounded-xl shadow-xl relative overflow-hidden"
       >
-        <!-- Notification for Extreme Weather -->
         <section
           class="bg-red-500 text-white p-4 rounded-lg mb-6 animate-pulse"
         >
-          <p class="text-center font-bold">
-            🚨 Weather Alert: Heavy Rain Expected
+          <p id="weather-alert" class="text-center font-bold">
+            🚨 Indeks kualitas udara: Fetching data...
           </p>
         </section>
 
-        <!-- Glassmorphism Header -->
         <header
           class="bg-white/10 backdrop-blur-sm p-4 rounded-xl mb-6 text-center shadow-md"
         >
-          <p class="text-gray-200 text-2xl">Good Morning</p>
-          <h2 class="font-bold text-4xl">12:27 PM</h2>
+          <p id="greeting" class="text-gray-200 text-2xl">Good Morning</p>
+          <h2 id="time" class="font-bold text-4xl text-white">12:27 PM</h2>
         </header>
 
-        <!-- Temperature and Condition -->
         <article
-          class="bg-white/10 backdrop-blur-md p-6 rounded-xl text-center shadow-lg mb-8"
+          class="p-6 rounded-xl text-center shadow-xl relative overflow-hidden"
+          style="
+            background-image: url('/path/to/your/image.png');
+            background-size: cover;
+          "
         >
-          <div class="flex items-center justify-center">
-            <h3 class="text-6xl font-extrabold drop-shadow-lg" id="temperatureH3">
-              20°
-            </h3>
-            <div class="flex flex-col items-start ml-4 text-left mt-6">
-              <div class="flex items-center space-x-2">
-                <img src="./images/icons/wind.svg" alt="Wind" class="w-7 h-7" />
-                <span id="wind-speed" class="text-base">-- mph</span>
-              </div>
-              <div class="flex items-center space-x-2 mt-2">
-                <img
-                  src="./images/icons/humidity.svg"
-                  alt="Humidity"
-                  class="w-7 h-7"
-                />
-                <span id="humidity" class="text-base">--%</span>
-              </div>
+          <h3 class="text-7xl font-extrabold text-white" id="temperatureH3">
+            20°
+          </h3>
+
+          <div class="flex justify-center space-x-6 mt-4">
+            <div class="flex items-center space-x-2">
+              <img
+                src="./images/icons/wind.svg"
+                alt="Wind"
+                class="w-7 h-7 opacity-80"
+              />
+              <span id="wind-speedKanan" class="text-lg text-white"
+                >4.4 mph</span
+              >
+            </div>
+
+            <!-- Kelembapan -->
+            <div class="flex items-center space-x-2">
+              <img
+                src="./images/icons/humidity.svg"
+                alt="Humidity"
+                class="w-7 h-7 opacity-80"
+              />
+              <span id="humidityKanan" class="text-lg text-white">0 mm</span>
             </div>
           </div>
-          <p class="text-gray-300 text-lg mt-2">Feels like 19°</p>
-          <p class="text-2xl mt-4 animate-bounce">☁️ Cloudy</p>
+
+          <!-- Informasi Tambahan -->
+          <p id="feels-like" class="text-lg mt-4 text-white">Feels like 19°</p>
+          <p id="weather-status" class="text-3xl mt-4 text-white">☁️ Cloudy</p>
         </article>
 
         <!-- Hourly Forecast -->
         <section>
-          <h2 class="text-gray-200 text-xl mb-4 text-center">
+          <h2 class="text-gray-200 text-xl mb-4 mt-4 text-center">
             Hourly Forecast
           </h2>
-          <div class="grid grid-cols-3 gap-6">
-            <!-- Forecast Card with Hover Effect -->
-            <article
-              class="flex flex-col items-center justify-center w-full h-36 bg-white/30 backdrop-blur-md border border-gray-200 rounded-xl p-4 shadow-md transition transform hover:scale-105"
-            >
-              <p class="text-sm text-black">1 PM</p>
-              <p class="text-3xl font-bold text-black">20°</p>
-              <p class="text-sm text-black mt-1">☁️ Cloudy</p>
+          <div id="weather-container" class="grid grid-cols-3 gap-4">
+            <article class="forecast-card">
+              <p class="text-xs text-black">13 PM</p>
+              <p class="temperature">29°</p>
+              <p class="text-xs text-black">☁️ Partly cloudy</p>
             </article>
 
-            <article
-              class="flex flex-col items-center justify-center w-full h-36 bg-white/30 backdrop-blur-md border border-gray-200 rounded-xl p-4 shadow-md transition transform hover:scale-105"
-            >
-              <p class="text-sm text-black">2 PM</p>
-              <p class="text-3xl font-bold text-black">21°</p>
-              <p class="text-sm text-black">🌧 Rainy</p>
+            <article class="forecast-card">
+              <p class="text-xs text-black">14 PM</p>
+              <p class="temperature">29°</p>
+              <p class="text-xs text-black">🌥 Partly cloudy</p>
             </article>
 
-            <article
-              class="flex flex-col items-center justify-center w-full h-36 bg-white/30 backdrop-blur-md border border-gray-200 rounded-xl p-4 shadow-md transition transform hover:scale-105"
-            >
-              <p class="text-sm text-black">3 PM</p>
-              <p class="text-3xl font-bold text-black">21°</p>
-              <p class="text-sm text-black">🌧 Rainy</p>
+            <article class="forecast-card">
+              <p class="text-xs text-black">15 PM</p>
+              <p class="temperature">28°</p>
+              <p class="text-xs text-black">⛅ Partly cloudy</p>
             </article>
 
-            <article
-              class="flex flex-col items-center justify-center w-full h-36 bg-white/30 backdrop-blur-md border border-gray-200 rounded-xl p-4 shadow-md transition transform hover:scale-105"
-            >
-              <p class="text-sm text-black">4 PM</p>
-              <p class="text-3xl font-bold text-black">20°</p>
-              <p class="text-sm text-black mt-1">☁️ Cloudy</p>
+            <article class="forecast-card">
+              <p class="text-xs text-black">16 PM</p>
+              <p class="temperature">27°</p>
+              <p class="text-xs text-black">🌥 Overcast</p>
             </article>
 
-            <article
-              class="flex flex-col items-center justify-center w-full h-36 bg-white/30 backdrop-blur-md border border-gray-200 rounded-xl p-4 shadow-md transition transform hover:scale-105"
-            >
-              <p class="text-sm text-black">5 PM</p>
-              <p class="text-3xl font-bold text-black">21°</p>
-              <p class="text-sm text-black">🌧 Rainy</p>
+            <article class="forecast-card">
+              <p class="text-xs text-black">17 PM</p>
+              <p class="temperature">27°</p>
+              <p class="text-xs text-black">⛅ Partly cloudy</p>
             </article>
 
-            <article
-              class="flex flex-col items-center justify-center w-full h-36 bg-white/30 backdrop-blur-md border border-gray-200 rounded-xl p-4 shadow-md transition transform hover:scale-105"
-            >
-              <p class="text-sm text-black">6 PM</p>
-              <p class="text-3xl font-bold text-black">21°</p>
-              <p class="text-sm text-black">🌧 Rainy</p>
+            <article class="forecast-card">
+              <p class="text-xs text-black">18 PM</p>
+              <p class="temperature">27°</p>
+              <p class="text-xs text-black">☀️ Mainly clear</p>
             </article>
           </div>
         </section>
 
-        <!-- Temperature Trend Chart with Gradient Background -->
-        <!-- <section class="mt-8">
-          <h2 class="text-gray-200 text-xl mb-4 text-center">
-            Temperature Trend
-          </h2>
-          <div
-            class="bg-gradient-to-r from-blue-500 to-purple-500 p-6 rounded-xl shadow-lg"
-          >
-            <canvas id="temperatureChart" class="w-full h-48"></canvas>
-          </div>
-        </section> -->
-
-        <!-- Animated Weather Icon and Background Elements -->
         <div class="absolute inset-0 pointer-events-none">
           <div
             class="absolute w-64 h-64 bg-yellow-300 rounded-full opacity-20 -top-32 -right-24 animate-spin-slow"
