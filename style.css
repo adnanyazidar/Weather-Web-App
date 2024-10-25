@@ -14,23 +14,6 @@ body {
   color: var(--text-color);
 }
 
-.forecast-card {
-  @apply flex flex-col items-center justify-center w-full h-40 bg-white/30 backdrop-blur-md border border-gray-200 rounded-xl p-4 shadow-md transition transform hover:scale-105;
-  max-width: 100px;
-}
-
-#weather-container {
-  @apply grid grid-cols-3 gap-4;
-}
-
-.forecast-card p {
-  @apply text-xs md:text-sm;
-}
-
-.forecast-card .temperature {
-  @apply text-2xl font-bold;
-}
-
 .container-desktop {
   max-width: 1200px;
   width: 100%;
